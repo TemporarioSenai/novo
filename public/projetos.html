@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projetos Disponíveis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-[#a2c9ff] min-h-screen text-gray-800 font-sans">
+
+  <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md">
+    <h1 class="text-2xl font-bold">Projetos Disponíveis</h1>
+    <div class="flex gap-3">
+      <a href="criarProjeto.html"
+        class="bg-[#5083cb] hover:bg-[#87b2ee] text-white px-4 py-2 rounded-lg font-semibold transition">Criar Projeto</a>
+      <a href="editarPerfil.html"
+        class="bg-[#6c9add] hover:bg-[#87b2ee] text-white px-4 py-2 rounded-lg font-semibold transition">Editar Perfil</a>
+    </div>
+  </header>
+
+  <main class="p-6 flex flex-col items-center gap-6">
+
+  </main>
+
+  <script>
+    async function carregarProjetos() {
+      const container = document.querySelector("main");
+
+      function getIconForCurso(curso) {
+        const icons = {
+          "Desenvolvimento de Sistemas": "fas fa-laptop-code",
+          "Eletrotécnica": "fas fa-bolt",
+          "Mecânica": "fas fa-wrench",
+          "Eletromecânica": "fas fa-cogs",
+          "Segurança do Trabalho": "fas fa-hard-hat",
+          "Logística": "fas fa-truck",
+          "Planejamento e Controle da Produção": "fas fa-chart-bar"
+        };
+        return icons[curso] || "fas fa-question-circle";
+      }
+
+      try {
+        const res = await fetch("/api/projetos/listarProjetos");
+        const projetos = await res.json();
+
+        container.innerHTML = "";
+
+        projetos.forEach(p => {
+          const vagasHTML = p.vagas.map(vaga => {
+            const preenchida = vaga.vagas_total <= 0;
+            const cor = preenchida ? "text-green-600" : "text-red-600";
+            const iconeCurso = getIconForCurso(vaga.curso);
+            return `
+    <div class="flex flex-col items-center">
+      <i class="${iconeCurso} ${cor} text-xl"></i>
+      <span>${vaga.curso}: ${vaga.vagas_total} vaga(s)</span>
+    </div>
+  `;
+          }).join("");
+
+          const card = document.createElement("div");
+          card.className = "bg-white w-full max-w-3xl p-6 rounded-xl shadow-lg border border-[#6c9add]";
+          card.innerHTML = `
+          <h2 class="text-xl font-bold text-[#356bba] mb-2">${p.nome}</h2>
+          <p><strong>Descrição:</strong> ${p.descricao}</p>
+          <p><strong>Objetivo:</strong> ${p.objetivo}</p>
+          <p><strong>Curso Relacionado:</strong> ${p.curso_relacionado}</p>
+          <p><strong>Responsável:</strong> ${p.responsavel}</p>
+          <p><strong>Status:</strong> ${p.status}</p>
+          <p><strong>Início:</strong> ${p.data_inicio} | <strong>Fim:</strong> ${p.data_fim}</p>
+          <div class="mt-4 flex gap-4 flex-wrap text-sm text-gray-600">
+            ${vagasHTML}
+          </div>
+        <button onclick="candidatar(${p.id})"
+        class="mt-6 w-full bg-[#5083cb] hover:bg-[#87b2ee] text-white font-semibold py-2 rounded-lg transition">
+         Juntar-se
+         </button>
+        `;
+          container.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error("Erro ao carregar projetos:", err);
+        container.innerHTML = "<p class='text-red-600'>Erro ao carregar projetos.</p>";
+      }
+    }
+
+    carregarProjetos();
+
+    async function candidatar(projetoId) {
+      const confirmacao = confirm("Você deseja se candidatar a este projeto?");
+      if (!confirmacao) return;
+
+      const alunoId = localStorage.getItem("usuario_id");
+
+      try {
+        const res = await fetch(`/api/projetos/projetos/${projetoId}/candidatar`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ alunoId })
+        });
+
+        const resultado = await res.json();
+        if (res.ok) {
+          alert("Solicitação enviada ao responsável do projeto!");
+        } else {
+          alert("Erro: " + (resultado.error || "Não foi possível enviar sua solicitação."));
+        }
+      } catch (err) {
+        console.error("Erro ao enviar candidatura:", err);
+        alert("Erro ao enviar candidatura.");
+      }
+    }
+  </script>
+
+</body>
+
+</html>
