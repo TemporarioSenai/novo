@@ -9,23 +9,65 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
-<body class="bg-[#a2c9ff] min-h-screen text-gray-800 font-sans">
+<body class="bg-[#a2c9ff] min-h-screen text-gray-800 font-sans flex">
 
-  <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md">
-    <h1 class="text-2xl font-bold">Projetos Disponíveis</h1>
-    <div class="flex gap-3">
-      <a href="criarProjeto.html"
-        class="bg-[#5083cb] hover:bg-[#87b2ee] text-white px-4 py-2 rounded-lg font-semibold transition">Criar Projeto</a>
-      <a href="editarPerfil.html"
-        class="bg-[#6c9add] hover:bg-[#87b2ee] text-white px-4 py-2 rounded-lg font-semibold transition">Editar Perfil</a>
+  <!-- Sidebar -->
+  <aside class="bg-[#356bba] text-white w-64 flex-shrink-0 hidden md:flex flex-col justify-between py-6 px-4 shadow-lg">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center justify-center mb-8">
+        <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
+      </div>
+      <nav class="flex flex-col gap-4 text-lg font-semibold">
+        <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Meus Projetos</a>
+        <a href="criarProjeto.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-plus"></i> Criar Projeto</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
+        <a href="#" onclick="logout()" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </nav>
     </div>
-  </header>
+    <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
+  </aside>
 
-  <main class="p-6 flex flex-col items-center gap-6">
+  <!-- Conteúdo principal -->
+  <div class="flex-1 flex flex-col">
+    <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md md:hidden">
+      <h1 class="text-xl font-bold">Projetos Disponíveis</h1>
+      <button onclick="toggleMenu()" class="text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header>
 
-  </main>
+    <main class="p-6 flex flex-col items-center gap-6" id="conteudo">
+      <!-- projetos serão carregados via JS -->
+    </main>
+  </div>
+
+  <!-- Sidebar mobile -->
+  <div id="menuMobile" class="fixed inset-y-0 left-0 w-64 bg-[#356bba] text-white transform -translate-x-full transition-transform duration-300 z-50 flex flex-col justify-between py-6 px-4 shadow-lg md:hidden">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center justify-center mb-8">
+        <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
+      </div>
+      <nav class="flex flex-col gap-4 text-lg font-semibold">
+        <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Meus Projetos</a>
+        <a href="criarProjeto.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-plus"></i> Criar Projeto</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
+        <a href="#" onclick="logout()" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </nav>
+    </div>
+    <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
+  </div>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menuMobile");
+      menu.classList.toggle("-translate-x-full");
+    }
+
+    function logout() {
+      localStorage.removeItem("usuario_id");
+      window.location.href = "index.html";
+    }
+
     async function carregarProjetos() {
       const container = document.querySelector("main");
 

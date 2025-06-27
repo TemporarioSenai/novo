@@ -23,50 +23,63 @@
     <h1 class="text-4xl font-bold text-center text-[#356bba] mb-6">LOGIN</h1>
     <hr class="border-[#5083cb] mb-6" />
 
-    <div class="flex flex-col gap-4">
-      <label for="valor" class="font-semibold text-gray-700">Email ou CPF:</label>
-      <div class="relative">
-        <input id="valor" type="email" placeholder="Digite seu Email ou CPF"
-          class="w-full rounded-2xl border border-[#6c9add] px-4 py-3 pr-12 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
-        <!-- Ícone user -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#5083cb] absolute right-3 top-3.5 pointer-events-none"
-          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M5.121 17.804A9.966 9.966 0 0012 20a9.966 9.966 0 006.879-2.196M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
+    <form onsubmit="Logar(event)" class="flex flex-col gap-6">
+      <div class="flex flex-col gap-4">
+        <label for="valor" class="font-semibold text-gray-700">Email ou CPF:</label>
+        <div class="relative">
+          <input id="valor" type="text" placeholder="Digite seu Email ou CPF"
+            class="w-full rounded-2xl border border-[#6c9add] px-4 py-3 pr-12 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-[#5083cb] absolute right-3 top-3.5 pointer-events-none" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M5.121 17.804A9.966 9.966 0 0012 20a9.966 9.966 0 006.879-2.196M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
       </div>
-    </div>
 
-    <div class="flex flex-col gap-4">
-      <label for="senha" class="font-semibold text-gray-700">Senha:</label>
-      <div class="relative">
-        <input id="senha" type="password" placeholder="Digite sua Senha"
-          class="w-full rounded-2xl border border-[#6c9add] px-4 py-3 pr-12 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
-        <!-- Ícone lock -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#5083cb] absolute right-3 top-3.5 pointer-events-none"
-          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 11c1.104 0 2-.896 2-2V7a2 2 0 10-4 0v2c0 1.104.896 2 2 2z" />
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8H5z" />
-        </svg>
+      <div class="flex flex-col gap-4">
+        <label for="senha" class="font-semibold text-gray-700">Senha:</label>
+        <div class="relative">
+          <input id="senha" type="password" placeholder="Digite sua Senha"
+            class="w-full rounded-2xl border border-[#6c9add] px-4 py-3 pr-12 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-[#5083cb] absolute right-3 top-3.5 pointer-events-none" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 11c1.104 0 2-.896 2-2V7a2 2 0 10-4 0v2c0 1.104.896 2 2 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M5 11v8a2 2 0 002 2h10a2 2 0 002-2v-8H5z" />
+          </svg>
+        </div>
       </div>
-    </div>
 
-    <div class="flex justify-between items-center gap-4 mt-6">
-      <button onclick="Logar()"
-        class="flex-1 bg-[#5083cb] hover:bg-[#87b2ee] text-white font-bold py-3 rounded-2xl shadow-md transition duration-300">
-        Entrar
-      </button>
+      <div class="flex justify-between items-center gap-4 mt-6">
+        <button type="submit"
+          class="flex-1 bg-[#5083cb] hover:bg-[#87b2ee] text-white font-bold py-3 rounded-2xl shadow-md transition duration-300">
+          Entrar
+        </button>
 
-      <a href="cadastroUsuario.html"
-        class="flex-1 border border-[#5083cb] text-[#5083cb] font-bold py-3 rounded-2xl text-center hover:bg-[#87b2ee] hover:text-white transition duration-300">
-        Cadastrar
-      </a>
-    </div>
+        <a href="cadastroUsuario.html"
+          class="flex-1 border border-[#5083cb] text-[#5083cb] font-bold py-3 rounded-2xl text-center hover:bg-[#87b2ee] hover:text-white transition duration-300">
+          Cadastrar
+        </a>
+      </div>
+    </form>
 
   </div>
 
+  <script>
+    function Logar(event) {
+      event.preventDefault(); // evita submit padrão
+      // aqui continua sua lógica de login normalmente
+      console.log("Logar chamado");
+      // por exemplo
+      // const emailCpf = document.getElementById("valor").value;
+      // const senha = document.getElementById("senha").value;
+      // faça requisição ao backend
+    }
+  </script>
   <script src="js/login.js"></script>
 </body>
 

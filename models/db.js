@@ -14,6 +14,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     //adicionarCursos();
     //adicionarHardskills();
     //deletarTabela();
+    //renomearTabela();
 
   }
 });
@@ -38,8 +39,7 @@ DELETE FROM cursos WHERE id = 8;
 function deletarTabela() {
 
   db.run(`
-PRAGMA foreign_keys = OFF;
-DROP TABLE cursos;
+DROP TABLE participacoes_backup;
 
   `);
 
@@ -54,6 +54,14 @@ VALUES ("PLANEJAMENTO E CONTROLE DA PRODUÇÃO");
 
   `);
 }
+
+
+function renomearTabela() {
+  db.run('ALTER TABLE participacoes RENAME TO participacoes_backup;')
+}
+
+
+
 function adicionarHardskills() {
         const habilidades = [
   'Comunicação eficaz',
@@ -210,14 +218,14 @@ CREATE TABLE IF NOT EXISTS usuario_softskills (
 
   // Participações Ligações Alunos e Projetos
   db.run(`
- CREATE TABLE IF NOT EXISTS participacoes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    aluno_id INTEGER,
-    projeto_id INTEGER,
-    funcao TEXT, -- exemplo: líder, desenvolvedor, etc.
-    aprovado BOOLEAN DEFAULT 0,
-    FOREIGN KEY (aluno_id) REFERENCES alunos(id),
-    FOREIGN KEY (projeto_id) REFERENCES projetos(id)
+CREATE TABLE IF NOT EXISTS participacoes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  aluno_id INTEGER,
+  projeto_id INTEGER,
+  funcao TEXT,
+  aprovado BOOLEAN DEFAULT 0,
+  FOREIGN KEY (aluno_id) REFERENCES usuarios(id),
+  FOREIGN KEY (projeto_id) REFERENCES projetos(id)
 );
 
   `);

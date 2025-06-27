@@ -9,13 +9,29 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" />
 </head>
 
-<body class="bg-blue-800 text-gray-900 min-h-screen flex items-center justify-center px-4 py-10">
+<body class="bg-[#356bba] text-gray-900 min-h-screen flex items-center justify-center px-4 py-10">
+
   <div class="w-full max-w-5xl bg-white rounded-2xl shadow-lg p-6 md:p-10">
+
+<!-- Botão Voltar -->
+<a href="projetos.html"
+  class="inline-flex items-center gap-2 text-white bg-[#5083cb] hover:bg-[#87b2ee] font-bold py-2 px-4 rounded-xl transition duration-300 shadow-md mb-4">
+  <!-- ícone de seta -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+    viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M15 19l-7-7 7-7" />
+  </svg>
+  Voltar
+</a>
+
+
 
     <form id="form-editar" enctype="multipart/form-data" class="space-y-6">
       <div class="flex justify-center">
         <label for="foto" class="cursor-pointer">
-          <img id="preview-foto" src="" alt="Foto de perfil" class="w-36 h-36 object-cover rounded-full border-4 border-blue-800 shadow-md hover:scale-105 transition duration-300" />
+          <img id="preview-foto" src="" alt="Foto de perfil"
+            class="w-36 h-36 object-cover rounded-full border-4 border-[#5083cb] shadow-md hover:scale-105 transition duration-300" />
         </label>
         <input type="file" name="foto" id="foto" accept="image/*" hidden />
       </div>
@@ -23,22 +39,26 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label for="nome" class="font-semibold">Nome Completo:</label>
-          <input name="nome" type="text" placeholder="Victorio Souza" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="nome" type="text" placeholder="Victorio Souza"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
         <div>
           <label for="idade" class="font-semibold">Idade:</label>
-          <input name="idade" type="number" placeholder="33" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="idade" type="number" placeholder="33"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label for="email" class="font-semibold">Email:</label>
-          <input name="email" type="email" placeholder="victorio@email.com" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="email" type="email" placeholder="victorio@email.com"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
         <div>
           <label for="modulo" class="font-semibold">Módulo:</label>
-          <select name="modulo" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <select name="modulo"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]">
             <option value="1° Modulo" selected>1° Modulo</option>
             <option value="2° Modulo">2° Modulo</option>
             <option value="3° Modulo">3° Modulo</option>
@@ -50,37 +70,44 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label for="curso" class="font-semibold">Curso:</label>
-          <input name="curso" id="curso" list="lista-cursos" placeholder="Selecione ou digite seu curso" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="curso" id="curso" list="lista-cursos" placeholder="Selecione ou digite seu curso"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
           <datalist id="lista-cursos"></datalist>
         </div>
         <div>
           <label for="turma" class="font-semibold">Turma:</label>
-          <input name="turma" type="text" placeholder="DSI" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="turma" type="text" placeholder="DSI"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
       </div>
 
       <div>
         <label for="biografia" class="font-semibold">Biografia:</label>
-        <textarea name="biografia" id="biografia" rows="4" placeholder="Fale um pouco sobre você..." class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        <textarea name="biografia" id="biografia" rows="4" placeholder="Fale um pouco sobre você..."
+          class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]"></textarea>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label for="hardskills" class="font-semibold">Habilidades Técnicas:</label>
-          <input name="hardskills" id="hardskills" placeholder="Digite suas habilidades técnicas" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="hardskills" id="hardskills" placeholder="Digite suas habilidades técnicas"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
         <div>
           <label for="softskills" class="font-semibold">Soft Skills:</label>
-          <input name="softskills" id="softskills" placeholder="Digite suas soft skills" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <input name="softskills" id="softskills" placeholder="Digite suas soft skills"
+            class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
       </div>
 
       <div>
         <label for="portfolio" class="font-semibold">Portfólio:</label>
-        <input name="portfolio" type="url" placeholder="https://meuportfolio.com" class="w-full mt-1 rounded-xl border border-blue-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <input name="portfolio" type="url" placeholder="https://meuportfolio.com"
+          class="w-full mt-1 rounded-xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
       </div>
 
-      <button type="submit" class="w-full mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300">
+      <button type="submit"
+        class="w-full mt-4 bg-[#5083cb] hover:bg-[#87b2ee] text-white font-bold py-3 rounded-xl shadow-lg transition duration-300">
         Salvar Alterações
       </button>
     </form>

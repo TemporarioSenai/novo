@@ -1,4 +1,5 @@
-function Logar() {
+function Logar(event) {
+    event.preventDefault();
   const valor = document.getElementById('valor').value.trim();
   const senha = document.getElementById('senha').value.trim();
 

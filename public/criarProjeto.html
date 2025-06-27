@@ -8,12 +8,21 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen flex items-center justify-center px-4 py-10" style="background-color: rgb(42 60 172);">
+<body class="min-h-screen flex items-center justify-center px-4 py-10" style="background-color: #356bba;">
 
-  <div class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-gray-200">
-    <h1 class="text-3xl md:text-4xl font-bold mb-10 text-center flex items-center justify-center gap-3 text-indigo-800">
+  <div class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl p-8 md:p-12 border border-[#6c9add]">
+    <a href="projetos.html"
+      class="inline-flex items-center gap-2 text-white bg-[#5083cb] hover:bg-[#87b2ee] font-bold py-2 px-4 rounded-xl transition duration-300 shadow-md mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Voltar
+    </a>
+
+
+    <h1 class="text-3xl md:text-4xl font-bold mb-10 text-center flex items-center justify-center gap-3 text-[#356bba]">
       <!-- Ícone moderno SVG -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 text-indigo-800" fill="none" viewBox="0 0 24 24"
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 text-[#356bba]" fill="none" viewBox="0 0 24 24"
         stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
       </svg>
@@ -26,12 +35,12 @@
         <div>
           <label for="nome" class="block font-semibold mb-1 text-gray-700">Nome do Projeto</label>
           <input id="nome" type="text" placeholder="Projeto do Robô"
-            class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
         <div>
           <label for="descricao" class="block font-semibold mb-1 text-gray-700">Descrição</label>
           <input id="descricao" type="text" placeholder="Robô feito à mão"
-            class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
       </div>
 
@@ -39,42 +48,41 @@
         <div>
           <label for="objetivo" class="block font-semibold mb-1 text-gray-700">Objetivo</label>
           <input id="objetivo" type="text" placeholder="Fazer ele andar"
-            class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
         <div>
           <label for="cursoRelacionado" class="block font-semibold mb-1 text-gray-700">Curso Relacionado</label>
           <input id="cursoRelacionado" type="text" placeholder="Mecânica e Elétrica"
-            class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
       </div>
 
       <div>
         <label for="status" class="block font-semibold mb-1 text-gray-700">Status</label>
         <input id="status" type="text" placeholder="Em andamento"
-          class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label for="dataInicio" class="block font-semibold mb-1 text-gray-700">Data de Início</label>
           <input id="dataInicio" type="date"
-            class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
         <div>
           <label for="dataFim" class="block font-semibold mb-1 text-gray-700">Data de Fim</label>
           <input id="dataFim" type="date"
-            class="w-full rounded-2xl border border-indigo-300 bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            class="w-full rounded-2xl border border-[#6c9add] bg-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#5083cb]" />
         </div>
       </div>
 
       <div id="vagasContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
+        <!-- vagas adicionadas via JS -->
       </div>
-
 
       <div>
         <button type="submit"
-          class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-2xl shadow-lg transition duration-300">
+          class="w-full bg-[#5083cb] hover:bg-[#87b2ee] text-white font-bold py-3 rounded-2xl shadow-lg transition duration-300">
           Criar Projeto
         </button>
       </div>

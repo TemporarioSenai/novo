@@ -14,7 +14,7 @@ const projetosRoutes = require('./routes/projetos');
 const authRoutes = require('./routes/auth');
 
 
-app.use('/api /usuarios', usuariosRoutes);
+app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/projetos', projetosRoutes);
 app.use('/api/auth', authRoutes);
 

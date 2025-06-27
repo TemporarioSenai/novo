@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meus Projetos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body class="bg-[#a2c9ff] min-h-screen text-gray-800 font-sans flex">
+
+  <!-- Sidebar -->
+  <aside class="bg-[#356bba] text-white w-64 flex-shrink-0 hidden md:flex flex-col justify-between py-6 px-4 shadow-lg">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center justify-center mb-8">
+        <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
+      </div>
+      <nav class="flex flex-col gap-4 text-lg font-semibold">
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
+        <a href="login.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </nav>
+    </div>
+    <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <div class="flex-1 flex flex-col">
+    <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md md:hidden">
+      <h1 class="text-xl font-bold">Meus Projetos</h1>
+      <button onclick="toggleMenu()" class="text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header>
+
+    <main class="p-6 flex flex-col items-center gap-6" id="conteudo">
+
+      <!-- botão voltar -->
+      <a href="projetos.html"
+        class="inline-flex items-center gap-2 text-white bg-[#5083cb] hover:bg-[#87b2ee] font-bold py-2 px-4 rounded-xl transition duration-300 shadow-md self-start mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 19l-7-7 7-7" />
+        </svg>
+        Voltar
+      </a>
+
+      <div id="projetos-container" class="flex flex-col items-center gap-6 w-full">
+        <!-- projetos do usuário serão renderizados aqui -->
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Sidebar mobile -->
+  <div id="menuMobile" class="fixed inset-y-0 left-0 w-64 bg-[#356bba] text-white transform -translate-x-full transition-transform duration-300 z-50 flex flex-col justify-between py-6 px-4 shadow-lg md:hidden">
+    <div class="flex flex-col gap-6">
+      <div class="flex items-center justify-center mb-8">
+        <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
+      </div>
+      <nav class="flex flex-col gap-4 text-lg font-semibold">
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
+        <a href="login.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+      </nav>
+    </div>
+    <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menuMobile");
+      menu.classList.toggle("-translate-x-full");
+    }
+
+    async function carregarMeusProjetos() {
+  const container = document.getElementById("projetos-container");
+  const alunoId = localStorage.getItem("usuario_id");
+
+  if (!alunoId) {
+    alert("Você precisa estar logado!");
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/projetos/meusProjetosCompletos/${alunoId}`);
+    const data = await res.json();
+
+    container.innerHTML = `
+      <h2 class="text-2xl font-bold text-[#356bba] mb-4">Projetos que Criei</h2>
+      <div id="criados" class="space-y-4 mb-8"></div>
+      <h2 class="text-2xl font-bold text-[#356bba] mb-4">Projetos em que Participo</h2>
+      <div id="participando" class="space-y-4"></div>
+    `;
+
+    const criadosDiv = document.getElementById("criados");
+    const participandoDiv = document.getElementById("participando");
+
+    // renderizar projetos criados
+    if (data.criados.length === 0) {
+      criadosDiv.innerHTML = `<p class="text-gray-700">Você ainda não criou projetos.</p>`;
+    } else {
+      data.criados.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-xl shadow border border-[#6c9add]";
+        card.innerHTML = `
+          <h3 class="text-xl font-bold text-[#356bba]">${p.nome}</h3>
+          <p>${p.descricao}</p>
+          <div class="flex gap-2 mt-4">
+            <button onclick="irParaEdicao(${p.id})"
+              class="bg-[#5083cb] hover:bg-[#87b2ee] text-white px-4 py-2 rounded-lg">Editar</button>
+            <button onclick="deletarProjeto(${p.id})"
+              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Excluir</button>
+          </div>
+        `;
+        criadosDiv.appendChild(card);
+      });
+    }
+
+    // renderizar projetos participando
+    if (data.participando.length === 0) {
+      participandoDiv.innerHTML = `<p class="text-gray-700">Você não participa de nenhum projeto.</p>`;
+    } else {
+      data.participando.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "bg-white p-4 rounded-xl shadow border border-[#6c9add]";
+        card.innerHTML = `
+          <h3 class="text-xl font-bold text-[#356bba]">${p.nome}</h3>
+          <p>${p.descricao}</p>
+          <div class="flex gap-2 mt-4">
+            <button onclick="cancelarParticipacao(${p.id})"
+              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Sair do Projeto</button>
+          </div>
+        `;
+        participandoDiv.appendChild(card);
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = `<p class="text-red-600">Erro ao carregar projetos.</p>`;
+  }
+}
+
+  </script>
+
+</body>
+
+</html>
