@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projetos Disponíveis</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -18,17 +17,19 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Meus Projetos</a>
-        <a href="criarProjeto.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-plus"></i> Criar Projeto</a>
+        <a href="projetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
         <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="#" onclick="logout()" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
   </aside>
 
-  <!-- Conteúdo principal -->
+  <!-- Conteúdo -->
   <div class="flex-1 flex flex-col">
+    <!-- header mobile -->
     <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md md:hidden">
       <h1 class="text-xl font-bold">Projetos Disponíveis</h1>
       <button onclick="toggleMenu()" class="text-white text-2xl">
@@ -36,8 +37,10 @@
       </button>
     </header>
 
-    <main class="p-6 flex flex-col items-center gap-6" id="conteudo">
-      <!-- projetos serão carregados via JS -->
+    <main class="p-6 flex flex-col items-center gap-6 w-full">
+      <div id="projetos-container" class="flex flex-col gap-6 w-full max-w-4xl">
+        <!-- projetos renderizados via JS -->
+      </div>
     </main>
   </div>
 
@@ -48,116 +51,84 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Meus Projetos</a>
-        <a href="criarProjeto.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-plus"></i> Criar Projeto</a>
+        <a href="projetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
         <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="#" onclick="logout()" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
   </div>
 
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menuMobile");
-      menu.classList.toggle("-translate-x-full");
-    }
+<script>
+function toggleMenu() {
+  document.getElementById("menuMobile").classList.toggle("-translate-x-full");
+}
 
-    function logout() {
-      localStorage.removeItem("usuario_id");
-      window.location.href = "index.html";
-    }
+async function carregarProjetos() {
+  try {
+    const res = await fetch("/api/projetos/listarProjetos");
+    const projetos = await res.json();
 
-    async function carregarProjetos() {
-      const container = document.querySelector("main");
+    const container = document.getElementById("projetos-container");
+    container.innerHTML = "";
 
-      function getIconForCurso(curso) {
-        const icons = {
-          "Desenvolvimento de Sistemas": "fas fa-laptop-code",
-          "Eletrotécnica": "fas fa-bolt",
-          "Mecânica": "fas fa-wrench",
-          "Eletromecânica": "fas fa-cogs",
-          "Segurança do Trabalho": "fas fa-hard-hat",
-          "Logística": "fas fa-truck",
-          "Planejamento e Controle da Produção": "fas fa-chart-bar"
-        };
-        return icons[curso] || "fas fa-question-circle";
-      }
-
-      try {
-        const res = await fetch("/api/projetos/listarProjetos");
-        const projetos = await res.json();
-
-        container.innerHTML = "";
-
-        projetos.forEach(p => {
-          const vagasHTML = p.vagas.map(vaga => {
-            const preenchida = vaga.vagas_total <= 0;
-            const cor = preenchida ? "text-green-600" : "text-red-600";
-            const iconeCurso = getIconForCurso(vaga.curso);
-            return `
-    <div class="flex flex-col items-center">
-      <i class="${iconeCurso} ${cor} text-xl"></i>
-      <span>${vaga.curso}: ${vaga.vagas_total} vaga(s)</span>
-    </div>
-  `;
-          }).join("");
-
-          const card = document.createElement("div");
-          card.className = "bg-white w-full max-w-3xl p-6 rounded-xl shadow-lg border border-[#6c9add]";
-          card.innerHTML = `
-          <h2 class="text-xl font-bold text-[#356bba] mb-2">${p.nome}</h2>
-          <p><strong>Descrição:</strong> ${p.descricao}</p>
-          <p><strong>Objetivo:</strong> ${p.objetivo}</p>
-          <p><strong>Curso Relacionado:</strong> ${p.curso_relacionado}</p>
-          <p><strong>Responsável:</strong> ${p.responsavel}</p>
-          <p><strong>Status:</strong> ${p.status}</p>
-          <p><strong>Início:</strong> ${p.data_inicio} | <strong>Fim:</strong> ${p.data_fim}</p>
-          <div class="mt-4 flex gap-4 flex-wrap text-sm text-gray-600">
-            ${vagasHTML}
-          </div>
+    projetos.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "bg-white p-6 rounded-xl shadow border border-[#6c9add]";
+      card.innerHTML = `
+        <h2 class="text-xl font-bold text-[#356bba] mb-2">${p.nome}</h2>
+        <p><strong>Descrição:</strong> ${p.descricao}</p>
+        <p><strong>Objetivo:</strong> ${p.objetivo}</p>
+        <p><strong>Curso Relacionado:</strong> ${p.curso_relacionado}</p>
+        <p><strong>Status:</strong> ${p.status}</p>
+        <p><strong>Início:</strong> ${p.data_inicio} | <strong>Fim:</strong> ${p.data_fim}</p>
         <button onclick="candidatar(${p.id})"
-        class="mt-6 w-full bg-[#5083cb] hover:bg-[#87b2ee] text-white font-semibold py-2 rounded-lg transition">
-         Juntar-se
-         </button>
-        `;
-          container.appendChild(card);
-        });
+          class="mt-4 bg-[#5083cb] hover:bg-[#87b2ee] text-white font-semibold px-4 py-2 rounded transition">
+          Juntar-se
+        </button>
+      `;
+      container.appendChild(card);
+    });
 
-      } catch (err) {
-        console.error("Erro ao carregar projetos:", err);
-        container.innerHTML = "<p class='text-red-600'>Erro ao carregar projetos.</p>";
-      }
+  } catch (err) {
+    console.error(err);
+    document.getElementById("projetos-container").innerHTML = `<p class="text-red-600">Erro ao carregar projetos.</p>`;
+  }
+}
+
+async function candidatar(projetoId) {
+  if (!confirm("Deseja se candidatar a este projeto?")) return;
+
+  const alunoId = localStorage.getItem("usuario_id");
+  if (!alunoId) {
+    alert("É necessário estar logado para se candidatar.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`/api/projetos/projetos/${projetoId}/candidatar`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ alunoId })
+    });
+
+    const resultado = await res.json();
+
+    if (res.ok) {
+      alert("Solicitação enviada com sucesso!");
+    } else {
+      alert(`Erro: ${resultado.error || "Não foi possível enviar sua solicitação."}`);
     }
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao enviar candidatura.");
+  }
+}
 
-    carregarProjetos();
-
-    async function candidatar(projetoId) {
-      const confirmacao = confirm("Você deseja se candidatar a este projeto?");
-      if (!confirmacao) return;
-
-      const alunoId = localStorage.getItem("usuario_id");
-
-      try {
-        const res = await fetch(`/api/projetos/projetos/${projetoId}/candidatar`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ alunoId })
-        });
-
-        const resultado = await res.json();
-        if (res.ok) {
-          alert("Solicitação enviada ao responsável do projeto!");
-        } else {
-          alert("Erro: " + (resultado.error || "Não foi possível enviar sua solicitação."));
-        }
-      } catch (err) {
-        console.error("Erro ao enviar candidatura:", err);
-        alert("Erro ao enviar candidatura.");
-      }
-    }
-  </script>
+carregarProjetos();
+</script>
 
 </body>
-
 </html>
