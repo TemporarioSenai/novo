@@ -60,7 +60,6 @@
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
   </div>
-
 <script>
 function toggleMenu() {
   document.getElementById("menuMobile").classList.toggle("-translate-x-full");
@@ -71,24 +70,58 @@ async function carregarProjetos() {
     const res = await fetch("/api/projetos/listarProjetos");
     const projetos = await res.json();
 
+    const iconesCurso = {
+      "Desenvolvimento de Sistemas": "fa-laptop-code",
+      "Eletrotécnica": "fa-bolt",
+      "Mecânica": "fa-gears",
+      "Eletromecânica": "fa-screwdriver-wrench",
+      "Segurança do Trabalho": "fa-helmet-safety",
+      "Logística": "fa-truck",
+      "Planejamento e Controle da Produção": "fa-chart-line"
+    };
+
     const container = document.getElementById("projetos-container");
     container.innerHTML = "";
 
     projetos.forEach(p => {
+      let vagasHTML = "";
+
+      if (p.vagas && p.vagas.length > 0) {
+        p.vagas.forEach(v => {
+          const icone = iconesCurso[v.curso] || "fa-graduation-cap";
+          const cor = v.vagas_ocupadas >= v.vagas_total ? "red" : "green";
+          vagasHTML += `
+            <div class="flex items-center gap-2 text-sm">
+              <i class="fa-solid ${icone}" style="color:${cor}"></i>
+              ${v.curso} (${v.vagas_ocupadas}/${v.vagas_total})
+            </div>
+          `;
+        });
+      } else {
+        vagasHTML = `<p class="text-gray-600">Nenhuma vaga cadastrada.</p>`;
+      }
+
       const card = document.createElement("div");
       card.className = "bg-white p-6 rounded-xl shadow border border-[#6c9add]";
-      card.innerHTML = `
-        <h2 class="text-xl font-bold text-[#356bba] mb-2">${p.nome}</h2>
-        <p><strong>Descrição:</strong> ${p.descricao}</p>
-        <p><strong>Objetivo:</strong> ${p.objetivo}</p>
-        <p><strong>Curso Relacionado:</strong> ${p.curso_relacionado}</p>
-        <p><strong>Status:</strong> ${p.status}</p>
-        <p><strong>Início:</strong> ${p.data_inicio} | <strong>Fim:</strong> ${p.data_fim}</p>
-        <button onclick="candidatar(${p.id})"
-          class="mt-4 bg-[#5083cb] hover:bg-[#87b2ee] text-white font-semibold px-4 py-2 rounded transition">
-          Juntar-se
-        </button>
-      `;
+     card.innerHTML = `
+  <h2 class="text-xl font-bold text-[#356bba] mb-2">${p.nome}</h2>
+  <p><strong>Descrição:</strong> ${p.descricao}</p>
+  <p><strong>Objetivo:</strong> ${p.objetivo}</p>
+  <div class="mt-2">
+    <strong>Cursos e Vagas:</strong>
+    <div class="flex flex-col gap-1 mt-1">
+      ${vagasHTML}
+    </div>
+  </div>
+  <p class="mt-2"><strong>Status:</strong> ${p.status}</p>
+  <p><strong>Início:</strong> ${p.data_inicio} | <strong>Fim:</strong> ${p.data_fim}</p>
+  <p><strong>Responsável:</strong> ${p.responsavel || "Não informado"}</p>
+  <button onclick="candidatar(${p.id})"
+    class="mt-4 bg-[#5083cb] hover:bg-[#87b2ee] text-white font-semibold px-4 py-2 rounded transition">
+    Juntar-se
+  </button>
+`;
+
       container.appendChild(card);
     });
 
@@ -129,6 +162,7 @@ async function candidatar(projetoId) {
 
 carregarProjetos();
 </script>
+
 
 </body>
 </html>

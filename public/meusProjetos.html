@@ -18,17 +18,24 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
-        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
-        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="login.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i>
+          Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i>
+          Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i
+            class="fas fa-tasks"></i> Gerenciar Solicitações</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i>
+          Editar Perfil</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i>
+          Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
   </aside>
 
-  <!-- Conteúdo principal -->
+  <!-- Conteúdo -->
   <div class="flex-1 flex flex-col">
+    <!-- header mobile -->
     <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md md:hidden">
       <h1 class="text-xl font-bold">Meus Projetos</h1>
       <button onclick="toggleMenu()" class="text-white text-2xl">
@@ -36,120 +43,289 @@
       </button>
     </header>
 
-    <main class="p-6 flex flex-col items-center gap-6" id="conteudo">
+    <main class="p-6 flex flex-col gap-8 w-full">
 
-      <!-- botão voltar -->
-      <a href="projetos.html"
-        class="inline-flex items-center gap-2 text-white bg-[#5083cb] hover:bg-[#87b2ee] font-bold py-2 px-4 rounded-xl transition duration-300 shadow-md self-start mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-          viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M15 19l-7-7 7-7" />
-        </svg>
-        Voltar
-      </a>
+      <!-- Meus projetos -->
+      <section>
+        <h2 class="text-2xl font-bold text-[#356bba] mb-4">Meus Projetos Criados</h2>
+        <div id="meus-projetos-container" class="flex flex-col gap-4"></div>
+      </section>
 
-      <div id="projetos-container" class="flex flex-col items-center gap-6 w-full">
-        <!-- projetos do usuário serão renderizados aqui -->
-      </div>
+      <!-- Projetos participando -->
+      <section>
+        <h2 class="text-2xl font-bold text-[#356bba] mb-4">Projetos que Participo</h2>
+        <div id="projetos-participando-container" class="flex flex-col gap-4"></div>
+      </section>
 
     </main>
   </div>
 
   <!-- Sidebar mobile -->
-  <div id="menuMobile" class="fixed inset-y-0 left-0 w-64 bg-[#356bba] text-white transform -translate-x-full transition-transform duration-300 z-50 flex flex-col justify-between py-6 px-4 shadow-lg md:hidden">
+  <div id="menuMobile"
+    class="fixed inset-y-0 left-0 w-64 bg-[#356bba] text-white transform -translate-x-full transition-transform duration-300 z-50 flex flex-col justify-between py-6 px-4 shadow-lg md:hidden">
     <div class="flex flex-col gap-6">
       <div class="flex items-center justify-center mb-8">
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
-        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
-        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="login.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i>
+          Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i>
+          Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i
+            class="fas fa-tasks"></i> Gerenciar Solicitações</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i>
+          Editar Perfil</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i>
+          Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
   </div>
 
+  <!-- Modal de edição -->
+  <div id="modalEditar"
+    class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 overflow-auto p-4">
+    <div class="bg-white rounded-xl p-6 shadow w-full max-w-2xl relative">
+      <h2 class="text-xl font-bold text-[#356bba] mb-4">Editar Projeto</h2>
+      <form id="formEditarProjeto" class="flex flex-col gap-4">
+        <input type="hidden" id="editar-id" />
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-semibold">Nome</label>
+            <input type="text" id="editar-nome" class="border rounded w-full p-2" />
+          </div>
+          <div>
+            <label class="font-semibold">Descrição</label>
+            <input type="text" id="editar-descricao" class="border rounded w-full p-2" />
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-semibold">Objetivo</label>
+            <input type="text" id="editar-objetivo" class="border rounded w-full p-2" />
+          </div>
+          <div>
+            <label class="font-semibold">Status</label>
+            <select id="editar-status" class="border rounded w-full p-2">
+              <option value="Ativo">Ativo</option>
+              <option value="Encerrado">Encerrado</option>
+              <option value="Em andamento">Em andamento</option>
+              <option value="Pausado">Pausado</option>
+              <option value="Cancelado">Cancelado</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="font-semibold">Data de Início</label>
+            <input type="date" id="editar-data-inicio" class="border rounded w-full p-2" />
+          </div>
+          <div>
+            <label class="font-semibold">Data de Fim</label>
+            <input type="date" id="editar-data-fim" class="border rounded w-full p-2" />
+          </div>
+        </div>
+
+
+
+        <!-- Participantes -->
+        <div>
+          <h3 class="font-semibold text-[#356bba] mb-2">Participantes</h3>
+          <div id="editar-participantes-container" class="flex flex-col gap-2">
+            <!-- preenchido via JS -->
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 mt-4">
+          <button type="button" onclick="fecharModalEditar()"
+            class="bg-gray-400 text-white px-4 py-2 rounded">Cancelar</button>
+          <button type="submit" class="bg-[#356bba] hover:bg-[#5083cb] text-white px-4 py-2 rounded">Salvar</button>
+        </div>
+      </form>
+      <button onclick="fecharModalEditar()" class="absolute top-2 right-4 text-xl text-gray-500">&times;</button>
+    </div>
+  </div>
+
+  <!-- JS -->
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("menuMobile");
-      menu.classList.toggle("-translate-x-full");
+      document.getElementById("menuMobile").classList.toggle("-translate-x-full");
     }
 
     async function carregarMeusProjetos() {
-  const container = document.getElementById("projetos-container");
-  const alunoId = localStorage.getItem("usuario_id");
+      try {
+        const usuarioId = localStorage.getItem("usuario_id");
+        if (!usuarioId) {
+          alert("Faça login novamente.");
+          window.location.href = "index.html";
+          return;
+        }
 
-  if (!alunoId) {
-    alert("Você precisa estar logado!");
-    window.location.href = "login.html";
-    return;
-  }
+        // meus projetos
+        const resCriados = await fetch(`/api/projetos/meus/${usuarioId}`);
+        const projetosCriados = await resCriados.json();
+        const meusContainer = document.getElementById("meus-projetos-container");
+        meusContainer.innerHTML = "";
 
-  try {
-    const res = await fetch(`/api/projetos/meusProjetosCompletos/${alunoId}`);
-    const data = await res.json();
+        projetosCriados.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "bg-white p-4 rounded shadow border border-[#6c9add]";
+          card.innerHTML = `
+            <h3 class="text-xl font-semibold text-[#356bba] mb-2">${p.nome}</h3>
+            <p><strong>Descrição:</strong> ${p.descricao}</p>
+            <p><strong>Status:</strong> ${p.status}</p>
+            <div class="flex gap-2 mt-3">
+              <button class="bg-[#5083cb] hover:bg-[#87b2ee] text-white px-3 py-1 rounded" onclick="editarProjeto(${p.id})">Editar</button>
+              <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" onclick="excluirProjeto(${p.id})">Excluir</button>
+            </div>
+          `;
+          meusContainer.appendChild(card);
+        });
 
-    container.innerHTML = `
-      <h2 class="text-2xl font-bold text-[#356bba] mb-4">Projetos que Criei</h2>
-      <div id="criados" class="space-y-4 mb-8"></div>
-      <h2 class="text-2xl font-bold text-[#356bba] mb-4">Projetos em que Participo</h2>
-      <div id="participando" class="space-y-4"></div>
-    `;
+        // projetos participando
+        const resParticipando = await fetch(`/api/projetos/participando/${usuarioId}`);
+        const participando = await resParticipando.json();
+        const partContainer = document.getElementById("projetos-participando-container");
+        partContainer.innerHTML = "";
+        participando.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "bg-white p-4 rounded shadow border border-[#6c9add]";
+          card.innerHTML = `
+            <h3 class="text-xl font-semibold text-[#356bba] mb-2">${p.nome}</h3>
+            <p><strong>Descrição:</strong> ${p.descricao}</p>
+            <p><strong>Função:</strong> ${p.funcao}</p>
+            <p><strong>Status:</strong> ${p.status}</p>
+          `;
+          partContainer.appendChild(card);
+        });
 
-    const criadosDiv = document.getElementById("criados");
-    const participandoDiv = document.getElementById("participando");
-
-    // renderizar projetos criados
-    if (data.criados.length === 0) {
-      criadosDiv.innerHTML = `<p class="text-gray-700">Você ainda não criou projetos.</p>`;
-    } else {
-      data.criados.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "bg-white p-4 rounded-xl shadow border border-[#6c9add]";
-        card.innerHTML = `
-          <h3 class="text-xl font-bold text-[#356bba]">${p.nome}</h3>
-          <p>${p.descricao}</p>
-          <div class="flex gap-2 mt-4">
-            <button onclick="irParaEdicao(${p.id})"
-              class="bg-[#5083cb] hover:bg-[#87b2ee] text-white px-4 py-2 rounded-lg">Editar</button>
-            <button onclick="deletarProjeto(${p.id})"
-              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Excluir</button>
-          </div>
-        `;
-        criadosDiv.appendChild(card);
-      });
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao carregar projetos.");
+      }
     }
 
-    // renderizar projetos participando
-    if (data.participando.length === 0) {
-      participandoDiv.innerHTML = `<p class="text-gray-700">Você não participa de nenhum projeto.</p>`;
-    } else {
-      data.participando.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "bg-white p-4 rounded-xl shadow border border-[#6c9add]";
-        card.innerHTML = `
-          <h3 class="text-xl font-bold text-[#356bba]">${p.nome}</h3>
-          <p>${p.descricao}</p>
-          <div class="flex gap-2 mt-4">
-            <button onclick="cancelarParticipacao(${p.id})"
-              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Sair do Projeto</button>
-          </div>
-        `;
-        participandoDiv.appendChild(card);
-      });
+    async function editarProjeto(projetoId) {
+      try {
+        const res = await fetch(`/api/projetos/${projetoId}/detalhes`);
+        const detalhes = await res.json();
+
+        const projeto = detalhes.projeto;
+        const vagas = detalhes.vagas;
+        const participantes = detalhes.participantes;
+
+        document.getElementById("editar-id").value = projeto.id;
+        document.getElementById("editar-nome").value = projeto.nome;
+        document.getElementById("editar-descricao").value = projeto.descricao;
+        document.getElementById("editar-objetivo").value = projeto.objetivo;
+        document.getElementById("editar-status").value = projeto.status;
+        document.getElementById("editar-data-inicio").value = projeto.data_inicio;
+        document.getElementById("editar-data-fim").value = projeto.data_fim;
+
+
+        const participantesContainer = document.getElementById("editar-participantes-container");
+        participantesContainer.innerHTML = "";
+        participantes.forEach(p => {
+          participantesContainer.innerHTML += `
+            <div class="border rounded p-2 flex justify-between items-center">
+              <div class="flex items-center gap-2">
+                <img src="/image/${p.foto}" class="w-8 h-8 rounded-full border" />
+                <span>${p.nome} (${p.funcao})</span>
+              </div>
+              <button onclick="removerParticipante(${p.participacao_id})" class="text-red-600 hover:text-red-800"><i class="fas fa-trash"></i> Remover</button>
+            </div>
+          `;
+        });
+
+        document.getElementById("modalEditar").classList.remove("hidden");
+        document.getElementById("modalEditar").classList.add("flex");
+
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao carregar detalhes do projeto.");
+      }
     }
 
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = `<p class="text-red-600">Erro ao carregar projetos.</p>`;
-  }
-}
+    async function excluirProjeto(projetoId) {
+      if (!confirm("Deseja realmente excluir este projeto?")) return;
+      try {
+        const res = await fetch(`/api/projetos/${projetoId}`, { method: "DELETE" });
+        const resultado = await res.json();
+        if (res.ok) {
+          alert("Projeto excluído com sucesso!");
+          carregarMeusProjetos();
+        } else {
+          alert(`Erro: ${resultado.error || "Não foi possível excluir o projeto."}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao excluir projeto.");
+      }
+    }
 
+    async function removerParticipante(participacaoId) {
+      if (!confirm("Deseja realmente remover este participante?")) return;
+      try {
+        const res = await fetch(`/api/projetos/solicitacoes/${participacaoId}/recusar`, { method: "DELETE" });
+        if (res.ok) {
+          alert("Participante removido!");
+          editarProjeto(document.getElementById("editar-id").value);
+        } else {
+          alert("Erro ao remover participante.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao remover participante.");
+      }
+    }
+
+    document.getElementById("formEditarProjeto").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const id = document.getElementById("editar-id").value;
+      const nome = document.getElementById("editar-nome").value;
+      const descricao = document.getElementById("editar-descricao").value;
+      const objetivo = document.getElementById("editar-objetivo").value;
+      const status = document.getElementById("editar-status").value;
+      const data_inicio = document.getElementById("editar-data-inicio").value;
+      const data_fim = document.getElementById("editar-data-fim").value;
+
+      const vagas = {};
+      document.querySelectorAll("#editar-vagas-container input").forEach(inp => {
+        const curso = inp.id.replace("vaga-", "");
+        vagas[curso] = parseInt(inp.value);
+      });
+
+      try {
+        const res = await fetch(`/api/projetos/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nome, descricao, objetivo, status, data_inicio, data_fim, vagas })
+        });
+        if (res.ok) {
+          alert("Projeto atualizado!");
+          fecharModalEditar();
+          carregarMeusProjetos();
+        } else {
+          alert("Erro ao atualizar projeto.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao atualizar projeto.");
+      }
+    });
+
+    function fecharModalEditar() {
+      document.getElementById("modalEditar").classList.add("hidden");
+      document.getElementById("modalEditar").classList.remove("flex");
+    }
+
+    carregarMeusProjetos();
   </script>
-
 </body>
 
 </html>

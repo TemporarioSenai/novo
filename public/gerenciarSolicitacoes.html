@@ -22,7 +22,7 @@
         <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
         <a href="gerenciarSolicitacoes.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
         <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="login.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
@@ -68,7 +68,7 @@
         <a href="meusProjetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
         <a href="gerenciarSolicitacoes.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
         <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="login.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
@@ -103,10 +103,17 @@
         const card = document.createElement("div");
         card.className = "bg-white p-6 rounded-xl shadow border border-[#6c9add]";
         card.innerHTML = `
+       <img src="/image/${s.aluno_foto || 'user-default.png'}"
+     alt="Foto do aluno"
+     class="w-24 h-24 rounded-full mb-4 shadow mx-auto" />
+
+
           <h3 class="text-xl font-bold text-[#356bba] mb-2">${s.projeto_nome}</h3>
           <p><strong>Aluno:</strong> ${s.aluno_nome}</p>
           <p><strong>Email:</strong> ${s.aluno_email}</p>
-          <p><strong>Curso:</strong> ${s.funcao || "Não informado"}</p>
+          <p><strong>Curso:</strong> ${s.aluno_curso || "Não informado"}</p>
+
+          <p><strong>Função:</strong> ${s.funcao || "Não informado"}</p>
           <p><strong>Turma:</strong> ${s.turma || "Não informado"}</p>
           <p><strong>Módulo:</strong> ${s.modulo || "Não informado"}</p>
           <p><strong>Portfólio:</strong> <a href="${s.portfolio || '#'}" target="_blank" class="text-[#5083cb] underline">${s.portfolio || "Não informado"}</a></p>

@@ -24,7 +24,33 @@ router.get("/listarProjetos", (req, res) => {
           [projeto.id],
           (err, vagas) => {
             if (err) reject(err);
-            else resolve({ ...projeto, vagas });
+
+            // para cada curso dentro do projeto, contar vagas preenchidas
+            const vagasComOcupacao = vagas.map(v => {
+              return new Promise((resvaga, rejvaga) => {
+                db.get(
+                  `SELECT COUNT(*) as ocupadas
+                   FROM participacoes pa
+                   JOIN usuarios u ON u.id = pa.aluno_id
+                   JOIN usuario_cursos uc ON uc.usuario_id = u.id
+                   JOIN cursos c ON c.id = uc.curso_id
+                   WHERE pa.projeto_id = ? AND c.curso = ? AND pa.aprovado = 1`,
+                  [projeto.id, v.curso],
+                  (err, ocupadas) => {
+                    if (err) rejvaga(err);
+                    else resvaga({
+                      curso: v.curso,
+                      vagas_total: v.vagas_total,
+                      vagas_ocupadas: ocupadas.ocupadas
+                    });
+                  }
+                );
+              });
+            });
+
+            Promise.all(vagasComOcupacao)
+              .then(result => resolve({ ...projeto, vagas: result }))
+              .catch(reject);
           }
         );
       });
@@ -216,39 +242,63 @@ router.post("/projetos/:id/candidatar", async (req, res) => {
   }
 });
 
+
+router.get("/testarProjeto", (req, res) => {
+  const { id } = req.params;
+  db.get(
+    `SELECT foto FROM usuarios WHERE id = 2;`,
+    [id],
+    (err, projeto) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro ao buscar projeto" });
+      }
+      res.json(projeto);
+    }
+  );
+});
+
+
+
+
+
 /* -------------------------------------------
   LISTAR SOLICITAÇÕES PENDENTES DO RESPONSÁVEL
 ---------------------------------------------- */
-router.get("/:responsavelId/solicitacoes", async (req, res) => {
+router.get("/:responsavelId/solicitacoes", (req, res) => {
   const { responsavelId } = req.params;
-
-  try {
-    const solicitacoes = await db.all(`
-      SELECT 
-        pa.id as participacao_id,
-        pa.aluno_id,
-        pa.projeto_id,
-        pa.funcao,
-        pa.aprovado,
-        u.nome as aluno_nome,
-        u.email as aluno_email,
-        u.idade,
-        u.turma,
-        u.modulo,
-        u.portfolio,
-        u.biografia,
-        p.nome as projeto_nome
-      FROM participacoes pa
-      JOIN usuarios u ON u.id = pa.aluno_id
-      JOIN projetos p ON p.id = pa.projeto_id
-      WHERE p.responsavel_id = ? AND pa.aprovado = 0
-    `, [responsavelId]);
-    res.json(solicitacoes);
-  } catch (err) {
+db.all(`
+  SELECT 
+    pa.id as participacao_id,
+    pa.aluno_id,
+    pa.projeto_id,
+    pa.funcao,
+    pa.aprovado,
+    u.nome as aluno_nome,
+    u.email as aluno_email,
+    u.idade,
+    u.turma,
+    u.modulo,
+    u.portfolio,
+    u.biografia,
+    u.foto as aluno_foto,
+    c.curso as aluno_curso,
+    p.nome as projeto_nome
+  FROM participacoes pa
+  JOIN usuarios u ON u.id = pa.aluno_id
+  JOIN projetos p ON p.id = pa.projeto_id
+  LEFT JOIN usuario_cursos uc ON uc.usuario_id = u.id
+  LEFT JOIN cursos c ON c.id = uc.curso_id
+  WHERE p.responsavel_id = ? AND pa.aprovado = 0
+`, [responsavelId], (err, rows) => {
+  if (err) {
     console.error("Erro ao buscar solicitações:", err);
-    res.status(500).json({ error: "Erro ao buscar solicitações." });
+    return res.status(500).json({ error: "Erro ao buscar solicitações." });
   }
+  res.json(rows);
 });
+});
+
 
 /* -------------------------------------------
   APROVAR SOLICITAÇÃO
@@ -279,6 +329,140 @@ router.delete("/solicitacoes/:participacaoId/recusar", async (req, res) => {
     res.status(500).json({ error: "Erro ao recusar participação." });
   }
 });
+
+//meus projetos
+router.get("/meus/:usuarioId", (req, res) => {
+  const { usuarioId } = req.params;
+
+  db.all(`
+    SELECT p.*, u.nome as responsavel
+    FROM projetos p
+    JOIN usuarios u ON u.id = p.responsavel_id
+    WHERE p.responsavel_id = ?
+  `, [usuarioId], (err, rows) => {
+    if (err) {
+      console.error("Erro ao buscar meus projetos:", err);
+      return res.status(500).json({ error: "Erro ao buscar seus projetos." });
+    }
+    res.json(rows);
+  });
+});
+
+
+
+
+
+// projetos participando
+router.get("/participando/:usuarioId", (req, res) => {
+  const { usuarioId } = req.params;
+
+  db.all(`
+    SELECT p.*, pa.funcao, pa.aprovado
+    FROM participacoes pa
+    JOIN projetos p ON p.id = pa.projeto_id
+    WHERE pa.aluno_id = ? AND pa.aprovado = 1
+  `, [usuarioId], (err, rows) => {
+    if (err) {
+      console.error("Erro ao buscar projetos participando:", err);
+      return res.status(500).json({ error: "Erro ao buscar seus projetos." });
+    }
+    res.json(rows);
+  });
+});
+
+
+//atualiza projeto
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  db.get("SELECT * FROM projetos WHERE id = ?", [id], (err, row) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao buscar projeto." });
+    }
+    res.json(row);
+  });
+});
+
+router.patch("/:id", (req, res) => {
+  const { id } = req.params;
+  const { nome, descricao, objetivo, status } = req.body;
+  db.run(`
+    UPDATE projetos SET nome = ?, descricao = ?, objetivo = ?, status = ?
+    WHERE id = ?
+  `, [nome, descricao, objetivo, status, id], function(err) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao atualizar projeto." });
+    }
+    res.json({ message: "Projeto atualizado com sucesso." });
+  });
+});
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  db.run("DELETE FROM projetos WHERE id = ?", [id], function(err) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao excluir projeto." });
+    }
+    res.json({ message: "Projeto excluído com sucesso." });
+  });
+});
+
+
+// detalhes completos do projeto
+router.get("/:id/detalhes", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // busca dados do projeto
+    const projeto = await new Promise((resolve, reject) => {
+      db.get(`
+        SELECT * FROM projetos WHERE id = ?
+      `, [id], (err, row) => {
+        if (err) reject(err);
+        else resolve(row);
+      });
+    });
+
+    // busca vagas do projeto
+    const vagas = await new Promise((resolve, reject) => {
+      db.all(`
+        SELECT curso, vagas_total FROM vagas_projetos WHERE projeto_id = ?
+      `, [id], (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+
+    // busca participantes aprovados
+    const participantes = await new Promise((resolve, reject) => {
+      db.all(`
+        SELECT pa.id as participacao_id, u.nome, u.email, u.foto, pa.funcao
+        FROM participacoes pa
+        JOIN usuarios u ON u.id = pa.aluno_id
+        WHERE pa.projeto_id = ? AND pa.aprovado = 1
+      `, [id], (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+
+    res.json({
+      projeto,
+      vagas,
+      participantes
+    });
+
+  } catch (err) {
+    console.error("Erro ao buscar detalhes do projeto:", err);
+    res.status(500).json({ error: "Erro ao buscar detalhes do projeto." });
+  }
+});
+
+
+
+
 
 
 
