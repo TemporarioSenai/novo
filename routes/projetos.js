@@ -352,12 +352,11 @@ router.get("/meus/:usuarioId", (req, res) => {
 
 
 
-// projetos participando
 router.get("/participando/:usuarioId", (req, res) => {
   const { usuarioId } = req.params;
 
   db.all(`
-    SELECT p.*, pa.funcao, pa.aprovado
+    SELECT p.*, pa.funcao, pa.aprovado, pa.id as participacao_id
     FROM participacoes pa
     JOIN projetos p ON p.id = pa.projeto_id
     WHERE pa.aluno_id = ? AND pa.aprovado = 1
@@ -369,6 +368,7 @@ router.get("/participando/:usuarioId", (req, res) => {
     res.json(rows);
   });
 });
+
 
 
 //atualiza projeto
@@ -459,6 +459,42 @@ router.get("/:id/detalhes", async (req, res) => {
     res.status(500).json({ error: "Erro ao buscar detalhes do projeto." });
   }
 });
+
+
+
+router.delete("/participacao/:participacaoId", (req, res) => {
+  const { participacaoId } = req.params;
+
+  db.run(
+    `DELETE FROM participacoes WHERE id = ?`,
+    [participacaoId],
+    function (err) {
+      if (err) {
+        console.error("Erro ao sair do projeto:", err);
+        return res.status(500).json({ error: "Erro ao sair do projeto." });
+      }
+      res.json({ message: "Saiu do projeto com sucesso." });
+    }
+  );
+});
+
+router.get("/debug/participacoes/:usuarioId", (req, res) => {
+  const { usuarioId } = req.params;
+
+  db.all(
+    `SELECT * FROM participacoes WHERE aluno_id = ?`,
+    [usuarioId],
+    (err, rows) => {
+      if (err) {
+        console.error("Erro debug:", err);
+        res.status(500).json({ error: "Erro no debug." });
+      } else {
+        res.json(rows);
+      }
+    }
+  );
+});
+
 
 
 
