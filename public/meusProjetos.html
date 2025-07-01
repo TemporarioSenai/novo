@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,6 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
+
 <body class="bg-[#a2c9ff] min-h-screen text-gray-800 font-sans flex">
 
   <!-- Sidebar -->
@@ -16,11 +18,21 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
-        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
-        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
-        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i>
+          Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i>
+          Meus Projetos</a>
+        <a href="projetosFinalizados.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i
+            class="fas fa-check-circle"></i> Projetos Finalizados</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i
+            class="fas fa-tasks"></i> Gerenciar Solicitações</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i>
+          Editar Perfil</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i>
+          Sair</a>
+        <a href="criarProjeto.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition">
+          <i class="fas fa-plus-circle"></i> Criar Projeto
+        </a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
@@ -57,11 +69,16 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
-        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
-        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
-        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
-        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i>
+          Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i>
+          Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i
+            class="fas fa-tasks"></i> Gerenciar Solicitações</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i>
+          Editar Perfil</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i>
+          Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
@@ -135,7 +152,8 @@
         </div>
 
         <div class="flex justify-end gap-2 mt-4">
-          <button type="button" onclick="fecharModalEditar()" class="bg-gray-400 text-white px-4 py-2 rounded">Cancelar</button>
+          <button type="button" onclick="fecharModalEditar()"
+            class="bg-gray-400 text-white px-4 py-2 rounded">Cancelar</button>
           <button type="submit" class="bg-[#356bba] hover:bg-[#5083cb] text-white px-4 py-2 rounded">Salvar</button>
         </div>
       </form>
@@ -146,4 +164,5 @@
   <!-- SCRIPTS -->
   <script src="js/meusProjetos.js"></script>
 </body>
+
 </html>
