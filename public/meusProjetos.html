@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
-
 <body class="bg-[#a2c9ff] min-h-screen text-gray-800 font-sans flex">
 
   <!-- Sidebar -->
@@ -18,16 +16,11 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i>
-          Projetos Disponíveis</a>
-        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i>
-          Meus Projetos</a>
-        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i
-            class="fas fa-tasks"></i> Gerenciar Solicitações</a>
-        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i>
-          Editar Perfil</a>
-        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i>
-          Sair</a>
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
@@ -38,32 +31,21 @@
     <!-- header mobile -->
     <header class="bg-[#356bba] text-white px-6 py-4 flex justify-between items-center shadow-md md:hidden">
       <h1 class="text-xl font-bold">Meus Projetos</h1>
-      <button onclick="toggleMenu()" class="text-white text-2xl">
+      <button onclick="toggleMenu()" class="text-white text-2xl" aria-label="Abrir menu">
         <i class="fas fa-bars"></i>
       </button>
     </header>
 
     <main class="p-6 flex flex-col gap-8 w-full">
-
-      <a href="projetos.html"
-        class="inline-flex items-center gap-2 text-white bg-[#5083cb] hover:bg-[#87b2ee] font-bold py-2 px-4 rounded-xl transition duration-300 shadow-md self-start mb-4">
-        <i class="fas fa-arrow-left"></i>
-        Voltar
-      </a>
-
-
-      <!-- Meus projetos -->
       <section>
         <h2 class="text-2xl font-bold text-[#356bba] mb-4">Meus Projetos Criados</h2>
         <div id="meus-projetos-container" class="flex flex-col gap-4"></div>
       </section>
 
-      <!-- Projetos participando -->
       <section>
         <h2 class="text-2xl font-bold text-[#356bba] mb-4">Projetos que Participo</h2>
         <div id="projetos-participando-container" class="flex flex-col gap-4"></div>
       </section>
-
     </main>
   </div>
 
@@ -75,26 +57,19 @@
         <img src="icons/senailogo.png" alt="Logo" class="w-28 rounded-xl shadow" />
       </div>
       <nav class="flex flex-col gap-4 text-lg font-semibold">
-        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i>
-          Projetos Disponíveis</a>
-        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i>
-          Meus Projetos</a>
-        <a href="projetosFinalizados.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i
-            class="fas fa-check-circle"></i> Projetos Finalizados</a>
-        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i
-            class="fas fa-tasks"></i> Gerenciar Solicitações</a>
-        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i>
-          Editar Perfil</a>
-        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i>
-          Sair</a>
+        <a href="projetos.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-list"></i> Projetos Disponíveis</a>
+        <a href="meusProjetos.html" class="bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-folder-open"></i> Meus Projetos</a>
+        <a href="gerenciarSolicitacoes.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-tasks"></i> Gerenciar Solicitações</a>
+        <a href="editarPerfil.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-user"></i> Editar Perfil</a>
+        <a href="index.html" class="hover:bg-[#5083cb] px-4 py-2 rounded transition"><i class="fas fa-sign-out-alt"></i> Sair</a>
       </nav>
     </div>
     <div class="text-center text-xs opacity-80 mt-8">&copy; 2025 SENAI</div>
   </div>
 
   <!-- Modal de edição -->
-  <div id="modalEditar"
-    class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 overflow-auto p-4">
+  <div id="modalEditar" role="dialog" aria-modal="true"
+    class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50 overflow-auto p-4 transition-opacity duration-300 ease-in-out">
     <div class="bg-white rounded-xl p-6 shadow w-full max-w-2xl relative">
       <h2 class="text-xl font-bold text-[#356bba] mb-4">Editar Projeto</h2>
       <form id="formEditarProjeto" class="flex flex-col gap-4">
@@ -125,7 +100,6 @@
               <option value="Pausado">Pausado</option>
               <option value="Cancelado">Cancelado</option>
             </select>
-
           </div>
         </div>
 
@@ -140,19 +114,28 @@
           </div>
         </div>
 
-
-
         <!-- Participantes -->
         <div>
           <h3 class="font-semibold text-[#356bba] mb-2">Participantes</h3>
-          <div id="editar-participantes-container" class="flex flex-col gap-2">
-            <!-- preenchido via JS -->
+          <div id="editar-participantes-container" class="flex flex-col gap-2"></div>
+        </div>
+
+        <!-- Documentos -->
+        <div class="mt-4 border-t pt-4">
+          <h3 class="font-semibold text-[#356bba] mb-2">Documentos do Projeto</h3>
+          <ul id="lista-documentos" class="flex flex-col gap-2 text-sm mb-4"></ul>
+          <div>
+            <label class="block font-semibold mb-1">Enviar novo documento</label>
+            <input type="file" id="arquivoDocumento" class="border rounded p-2 w-full" />
+            <button type="button" onclick="enviarDocumento()"
+              class="mt-2 bg-[#356bba] hover:bg-[#5083cb] text-white px-4 py-2 rounded">
+              Enviar Documento
+            </button>
           </div>
         </div>
 
         <div class="flex justify-end gap-2 mt-4">
-          <button type="button" onclick="fecharModalEditar()"
-            class="bg-gray-400 text-white px-4 py-2 rounded">Cancelar</button>
+          <button type="button" onclick="fecharModalEditar()" class="bg-gray-400 text-white px-4 py-2 rounded">Cancelar</button>
           <button type="submit" class="bg-[#356bba] hover:bg-[#5083cb] text-white px-4 py-2 rounded">Salvar</button>
         </div>
       </form>
@@ -160,207 +143,7 @@
     </div>
   </div>
 
-  <!-- JS -->
-  <script>
-    function toggleMenu() {
-      document.getElementById("menuMobile").classList.toggle("-translate-x-full");
-    }
-
-    async function carregarMeusProjetos() {
-      try {
-        const usuarioId = localStorage.getItem("usuario_id");
-        if (!usuarioId) {
-          alert("Faça login novamente.");
-          window.location.href = "index.html";
-          return;
-        }
-
-        // meus projetos
-        const resCriados = await fetch(`/api/projetos/meus/${usuarioId}`);
-        const projetosCriados = await resCriados.json();
-        const meusContainer = document.getElementById("meus-projetos-container");
-        meusContainer.innerHTML = "";
-
-        projetosCriados.forEach(p => {
-          const card = document.createElement("div");
-          card.className = "bg-white p-4 rounded shadow border border-[#6c9add]";
-          card.innerHTML = `
-            <h3 class="text-xl font-semibold text-[#356bba] mb-2">${p.nome}</h3>
-            <p><strong>Descrição:</strong> ${p.descricao}</p>
-            <p><strong>Status:</strong> ${p.status}</p>
-            <div class="flex gap-2 mt-3">
-              <button class="bg-[#5083cb] hover:bg-[#87b2ee] text-white px-3 py-1 rounded" onclick="editarProjeto(${p.id})">Editar</button>
-              <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded" onclick="excluirProjeto(${p.id})">Excluir</button>
-            </div>
-          `;
-          meusContainer.appendChild(card);
-        });
-
-        // projetos participando
-        const resParticipando = await fetch(`/api/projetos/participando/${usuarioId}`);
-        const participando = await resParticipando.json();
-        const partContainer = document.getElementById("projetos-participando-container");
-        partContainer.innerHTML = "";
-        participando.forEach(p => {
-          const card = document.createElement("div");
-          card.className = "bg-white p-4 rounded shadow border border-[#6c9add]";
-          card.innerHTML = `
-  <h3 class="text-xl font-semibold text-[#356bba] mb-2">${p.nome}</h3>
-  <p><strong>Descrição:</strong> ${p.descricao}</p>
-  <p><strong>Função:</strong> ${p.funcao}</p>
-  <p><strong>Status:</strong> ${p.status}</p>
-  <button onclick="sairProjeto(${p.participacao_id})"
-    class="mt-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded transition">
-    Sair do projeto
-  </button>
-`;
-
-          partContainer.appendChild(card);
-        });
-
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao carregar projetos.");
-      }
-    }
-
-    async function editarProjeto(projetoId) {
-      try {
-        const res = await fetch(`/api/projetos/${projetoId}/detalhes`);
-        const detalhes = await res.json();
-
-        const projeto = detalhes.projeto;
-        const vagas = detalhes.vagas;
-        const participantes = detalhes.participantes;
-
-        document.getElementById("editar-id").value = projeto.id;
-        document.getElementById("editar-nome").value = projeto.nome;
-        document.getElementById("editar-descricao").value = projeto.descricao;
-        document.getElementById("editar-objetivo").value = projeto.objetivo;
-        document.getElementById("editar-status").value = projeto.status;
-        document.getElementById("editar-data-inicio").value = projeto.data_inicio;
-        document.getElementById("editar-data-fim").value = projeto.data_fim;
-
-
-        const participantesContainer = document.getElementById("editar-participantes-container");
-        participantesContainer.innerHTML = "";
-        participantes.forEach(p => {
-          participantesContainer.innerHTML += `
-            <div class="border rounded p-2 flex justify-between items-center">
-              <div class="flex items-center gap-2">
-                <img src="/image/${p.foto}" class="w-8 h-8 rounded-full border" />
-                <span>${p.nome} (${p.funcao})</span>
-              </div>
-              <button onclick="removerParticipante(${p.participacao_id})" class="text-red-600 hover:text-red-800"><i class="fas fa-trash"></i> Remover</button>
-            </div>
-          `;
-        });
-
-        document.getElementById("modalEditar").classList.remove("hidden");
-        document.getElementById("modalEditar").classList.add("flex");
-
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao carregar detalhes do projeto.");
-      }
-    }
-
-
-    async function sairProjeto(participacaoId) {
-      if (!confirm("Tem certeza que deseja sair deste projeto?")) return;
-
-      try {
-        const res = await fetch(`/api/projetos/participacao/${participacaoId}`, {
-          method: "DELETE"
-        });
-        if (res.ok) {
-          alert("Você saiu do projeto!");
-          carregarMeusProjetos();
-        } else {
-          alert("Erro ao sair do projeto.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao sair do projeto.");
-      }
-    }
-
-
-    async function excluirProjeto(projetoId) {
-      if (!confirm("Deseja realmente excluir este projeto?")) return;
-      try {
-        const res = await fetch(`/api/projetos/${projetoId}`, { method: "DELETE" });
-        const resultado = await res.json();
-        if (res.ok) {
-          alert("Projeto excluído com sucesso!");
-          carregarMeusProjetos();
-        } else {
-          alert(`Erro: ${resultado.error || "Não foi possível excluir o projeto."}`);
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao excluir projeto.");
-      }
-    }
-
-    async function removerParticipante(participacaoId) {
-      if (!confirm("Deseja realmente remover este participante?")) return;
-      try {
-        const res = await fetch(`/api/projetos/solicitacoes/${participacaoId}/recusar`, { method: "DELETE" });
-        if (res.ok) {
-          alert("Participante removido!");
-          editarProjeto(document.getElementById("editar-id").value);
-        } else {
-          alert("Erro ao remover participante.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao remover participante.");
-      }
-    }
-
-    document.getElementById("formEditarProjeto").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const id = document.getElementById("editar-id").value;
-      const nome = document.getElementById("editar-nome").value;
-      const descricao = document.getElementById("editar-descricao").value;
-      const objetivo = document.getElementById("editar-objetivo").value;
-      const status = document.getElementById("editar-status").value;
-      const data_inicio = document.getElementById("editar-data-inicio").value;
-      const data_fim = document.getElementById("editar-data-fim").value;
-
-      const vagas = {};
-      document.querySelectorAll("#editar-vagas-container input").forEach(inp => {
-        const curso = inp.id.replace("vaga-", "");
-        vagas[curso] = parseInt(inp.value);
-      });
-
-      try {
-        const res = await fetch(`/api/projetos/${id}`, {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nome, descricao, objetivo, status, data_inicio, data_fim, vagas })
-        });
-        if (res.ok) {
-          alert("Projeto atualizado!");
-          fecharModalEditar();
-          carregarMeusProjetos();
-        } else {
-          alert("Erro ao atualizar projeto.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao atualizar projeto.");
-      }
-    });
-
-    function fecharModalEditar() {
-      document.getElementById("modalEditar").classList.add("hidden");
-      document.getElementById("modalEditar").classList.remove("flex");
-    }
-
-    carregarMeusProjetos();
-  </script>
+  <!-- SCRIPTS -->
+  <script src="js/meusProjetos.js"></script>
 </body>
-
 </html>

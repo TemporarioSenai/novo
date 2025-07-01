@@ -7,6 +7,100 @@ const bcrypt = require('bcrypt');
 const fs = require("fs");
 const nodemailer = require('nodemailer');
 
+
+const storageDocs = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../public/docs'));
+  },
+  filename: (req, file, cb) => {
+    const nomeArquivo = Date.now() + "_" + file.originalname;
+    cb(null, nomeArquivo);
+  }
+});
+
+const uploadDocs = multer({ storage: storageDocs });
+
+
+
+/**
+ * UPLOAD de documento para o projeto
+ */
+router.post("/:id/uploadDocumento", uploadDocs.single("arquivo"), (req, res) => {
+  const projetoId = req.params.id;
+
+  if (!req.file) {
+    return res.status(400).json({ error: "Nenhum arquivo enviado." });
+  }
+
+  const nomeArquivo = req.file.originalname;
+  const caminho = "/docs/" + req.file.filename;
+
+  db.run(`
+    INSERT INTO documentos_projetos (projeto_id, nome_arquivo, caminho_arquivo)
+    VALUES (?, ?, ?)
+  `, [projetoId, nomeArquivo, caminho], function(err) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao salvar documento." });
+    }
+    res.json({ message: "Documento enviado com sucesso!" });
+  });
+});
+
+/**
+ * LISTAR documentos de um projeto
+ */
+router.get("/:id/documentos", (req, res) => {
+  const projetoId = req.params.id;
+  db.all(`
+    SELECT * FROM documentos_projetos
+    WHERE projeto_id = ?
+  `, [projetoId], (err, rows) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao buscar documentos." });
+    }
+    res.json(rows);
+  });
+});
+
+/**
+ * REMOVER documento
+ */
+router.delete("/documentos/:documentoId", (req, res) => {
+  const documentoId = req.params.documentoId;
+
+  db.get(`
+    SELECT * FROM documentos_projetos WHERE id = ?
+  `, [documentoId], (err, doc) => {
+    if (err || !doc) {
+      return res.status(404).json({ error: "Documento não encontrado." });
+    }
+
+    // remove do banco
+    db.run(`
+      DELETE FROM documentos_projetos WHERE id = ?
+    `, [documentoId], (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Erro ao remover documento do banco." });
+      }
+
+      // remove do filesystem
+      fs.unlink(path.join(__dirname, "../public", doc.caminho_arquivo), (err) => {
+        if (err) {
+          console.warn("Erro ao remover arquivo físico, mas removido do banco.", err);
+        }
+        res.json({ message: "Documento removido com sucesso." });
+      });
+    });
+  });
+});
+
+
+
+
+
 router.get("/listarProjetos", (req, res) => {
   const queryProjetos = `
     SELECT p.*, u.nome AS responsavel
@@ -494,6 +588,46 @@ router.get("/debug/participacoes/:usuarioId", (req, res) => {
     }
   );
 });
+
+
+router.get("/projetos/finalizados", (req, res) => {
+  const hoje = new Date().toISOString().split("T")[0];
+  db.all(`
+    SELECT p.*, u.nome as responsavel_nome
+    FROM projetos p
+    JOIN usuarios u ON u.id = p.responsavel_id
+    WHERE p.data_fim <= ? AND p.status IN ('Encerrado', 'Finalizado', 'Cancelado')
+
+  `, [hoje], async (err, projetos) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Erro ao buscar projetos finalizados." });
+    }
+
+    try {
+      // Para cada projeto, buscar seus documentos
+      const projetosComDocs = await Promise.all(
+        projetos.map(async projeto => {
+          return new Promise((resolve, reject) => {
+            db.all(`
+              SELECT * FROM documentos_projetos WHERE projeto_id = ?
+            `, [projeto.id], (err, documentos) => {
+              if (err) reject(err);
+              else resolve({ ...projeto, documentos });
+            });
+          });
+        })
+      );
+
+      res.json(projetosComDocs);
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Erro ao buscar documentos dos projetos." });
+    }
+  });
+});
+
 
 
 
